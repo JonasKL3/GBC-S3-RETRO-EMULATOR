@@ -16,7 +16,7 @@ for relative,expected in manifest.items():
 files=subprocess.check_output(['git','ls-files','-z'],cwd=root).decode().split('\0')
 files=[name for name in files if name]
 out=root/'dist';out.mkdir(exist_ok=True)
-name=f'{system}-S3-DEV-{version}-SEM-TELEMETRIA.zip';target=out/name
+name=f'{system}-S3.zip';target=out/name
 with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
     for relative in sorted(files):
         path=root/relative
@@ -32,9 +32,27 @@ if '--publish' in sys.argv:
     tag='v'+version
     existing=subprocess.run(['gh','release','view',tag,'--json','tagName'],cwd=root,text=True,capture_output=True)
     if existing.returncode==0:
-        # Promote the tested version without replacing its existing ZIP or checksum.
+        # Rename the existing ZIP without recompressing or replacing its contents.
+        repo=os.environ['GH_REPO']
+        release=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/releases/tags/{tag}'],cwd=root,text=True))
+        legacy=f'{system}-S3-DEV-{version}-SEM-TELEMETRIA.zip'
+        matches=[asset for asset in release['assets'] if asset['name'] in (name,legacy)]
+        if len(matches)!=1:raise SystemExit('Expected one existing release ZIP; refusing a name collision')
+        asset=matches[0]
+        downloaded=out/'published';downloaded.mkdir(exist_ok=True)
+        subprocess.run(['gh','release','download',tag,'--pattern',asset['name'],'--dir',str(downloaded),'--clobber'],cwd=root,check=True)
+        published=downloaded/asset['name']
+        published_digest=hashlib.sha256(published.read_bytes()).hexdigest()
+        if asset.get('digest') and asset['digest']!='sha256:'+published_digest:raise SystemExit('Published ZIP hash mismatch')
+        with zipfile.ZipFile(published) as archive:
+            if archive.testzip() is not None:raise SystemExit('Invalid published ZIP')
+        if asset['name']!=name:
+            subprocess.run(['gh','api','--method','PATCH',f"repos/{repo}/releases/assets/{asset['id']}",'-f','name='+name],cwd=root,check=True,stdout=subprocess.DEVNULL)
+        checksum=downloaded/'SHA256SUMS.txt'
+        checksum.write_text(published_digest+'  '+name+'\n',encoding='ascii')
+        subprocess.run(['gh','release','upload',tag,str(checksum),'--clobber'],cwd=root,check=True)
         subprocess.run(['gh','release','edit',tag,'--prerelease=false','--latest','--title',f'{system}-S3 {version} — sem telemetria','--notes-file',str(root/'release/RELEASE_NOTES.md')],cwd=root,check=True)
-        print('Promoted stable release; original assets preserved: '+tag)
+        print(f'Stable release {tag}: {name}, original ZIP SHA256 {published_digest}')
     else:
         error=existing.stderr.lower()
         if 'release not found' not in error and '404' not in error:raise SystemExit(existing.stderr)

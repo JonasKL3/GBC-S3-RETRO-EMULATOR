@@ -134,7 +134,7 @@
   "licenses/GNUBOY-COPYING.txt": "91df39d1816bfb17a4dda2d3d2c83b1f6f2d38d53e53e41e8f97ad5ac46a0cad",
   "licenses/GNUBOY-CREDITS.txt": "be30c9fc7c7fe194fc6c289483237f14e154ed6ec1927eaed278d8887b8325fa",
   "release/RELEASE_NOTES.md": "c15a6a4daa04debabadfad9158e4d794faf7f235e88761e955c3db8f28b271d7",
-  "release/package_release.py": "20b551d3d485227cddff081f0034a3cc425fd7cc530741a464f02fe061fb689e",
+  "release/package_release.py": "8c8c0d111fbee98e6f928a799c1aa7ec2c8ada3ce96897f5c308adc4ceb3d675",
   "sd_template/JOGOS/GBC/cache_indices/README.txt": "c5ddbc6bdaae03f08cc922c55d234eed248a95981344d88448f3b762cc83b416",
   "sd_template/JOGOS/GBC/capas_originais/README.txt": "cff2be225b7e52d6a71797e1d9855bbe5d8f2cbd7bb8eadcfb79a5603e6eb3ae",
   "sd_template/JOGOS/GBC/cover/README.txt": "5c29aea7d5c5af97de44cbee18dff3bfaa230697ac6c8dc2b7da8927788f8d7e",
