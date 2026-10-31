@@ -1,0 +1,101 @@
+compiled cpu.c
+compiled mem.c
+compiled lcd.c
+compiled lcdc.c
+compiled hw.c
+compiled rtc.c
+compiled sound.c
+compiled palette.c
+compiled fastmem.c
+compiled emu.c
+compiled loader.c
+compiled save.c
+compiled inflate.c
+compiled miniz_tinfl.c
+compiled xz/xz_crc32.c
+compiled xz/xz_crc64.c
+compiled xz/xz_dec_lzma2.c
+compiled xz/xz_dec_stream.c
+compiled xz/xz_dec_bcj.c
+compiled gnuboy_platform.c
+test_video_regression native PASS
+Frame mailbox PASS: busy rejection, exclusive ownership, 5000 threaded handoffs, render admission
+
+test_frame_mailbox native PASS
+ring + RTC PASS
+platform BEGIN
+ROM BEGIN
+ROM OK
+core frames + wave audio PASS
+checked states + corruption rejection PASS
+
+dmg native PASS
+ring + RTC PASS
+platform BEGIN
+ROM BEGIN
+ROM OK
+core frames + wave audio PASS
+checked states + corruption rejection PASS
+
+cgb native PASS
+ring + RTC PASS
+platform BEGIN
+ROM BEGIN
+ROM OK
+core frames + wave audio PASS
+checked states + corruption rejection PASS
+
+mbc2 native PASS
+ring + RTC PASS
+platform BEGIN
+ROM BEGIN
+ROM OK
+core frames + wave audio PASS
+checked states + corruption rejection PASS
+
+mbc3 native PASS
+ring + RTC PASS
+platform BEGIN
+ROM BEGIN
+ROM OK
+core frames + wave audio PASS
+checked states + corruption rejection PASS
+
+mbc5 native PASS
+ring + RTC PASS
+platform BEGIN
+ROM BEGIN
+ROM OK
+core frames + wave audio PASS
+checked states + corruption rejection PASS
+
+mbc30 native PASS
+Frame-render skip PASS: CPU/RAM/PPU/audio/RTC state and final pixels identical
+
+dmg native PASS
+Frame-render skip PASS: CPU/RAM/PPU/audio/RTC state and final pixels identical
+
+cgb native PASS
+Frame-render skip PASS: CPU/RAM/PPU/audio/RTC state and final pixels identical
+
+mbc2 native PASS
+Frame-render skip PASS: CPU/RAM/PPU/audio/RTC state and final pixels identical
+
+mbc3 native PASS
+Frame-render skip PASS: CPU/RAM/PPU/audio/RTC state and final pixels identical
+
+mbc5 native PASS
+Frame-render skip PASS: CPU/RAM/PPU/audio/RTC state and final pixels identical
+
+mbc30 native PASS
+Frontend save/load + CRC rejection + backup recovery PASS
+
+[VIDEO] ASYNC loopCore=0 lcdCore=1 snapshot=46080B stripe=3840B DMA=OFF
+[VIDEO] DIRTY_STRIPES=ON reference=46080B
+Async video runtime PASS: exact patterned pixels, snapshot isolation, busy drop, drain/invalidate fences, identical-frame suppression, dirty stripe boundary, mode redraw, native/scaled bytes
+
+Covers PASS: no IO in draw, 160ms settle, 1024-byte maximum read, exact RGB565, cache hit without source, partial cancellation, missing/invalid retry, byte-swap restored
+
+Metadata PASS: flush/fsync/close commit, favorites/recent/volume roundtrip, write failure preserves committed file
+
+NATIVE AUDIT PASS (Clang undefined-behavior instrumentation + Zig diagnostic runtime)

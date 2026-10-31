@@ -1,0 +1,1 @@
+Coloque ROMs legalmente obtidas .gb e .gbc nesta pasta. O GBC-S3 DEV 0.3 valida tamanho, cabeçalho e mapper antes de chamar o núcleo GNUBoy. Limite inicial de ROM: 4 MiB; mappers não suportados são rejeitados.

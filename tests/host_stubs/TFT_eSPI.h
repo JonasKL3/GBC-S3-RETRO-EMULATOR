@@ -1,0 +1,4 @@
+#pragma once
+#include <stdint.h>
+#include "SPI.h"
+class TFT_eSPI { SPIClass spi; public: TFT_eSPI(int=320,int=240){} SPIClass& getSPIinstance(){return spi;} void init(){} void setRotation(int){} int width(){return 320;} int height(){return 240;} void fillScreen(uint16_t){} void drawRoundRect(int,int,int,int,int,uint16_t){} void fillRoundRect(int,int,int,int,int,uint16_t){} void setTextColor(uint16_t,uint16_t=0){} void setTextSize(int){} void setCursor(int,int){} void print(const char*){} template<class... A> void printf(const char*,A...){} void drawFastHLine(int,int,int,uint16_t){} void drawFastVLine(int,int,int,uint16_t){} void fillRect(int,int,int,int,uint16_t){} void pushImage(int,int,int,int,uint16_t*){} void writecommand(uint8_t){} void writedata(uint8_t){} void setSwapBytes(bool){} };

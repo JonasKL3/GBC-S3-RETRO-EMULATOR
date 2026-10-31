@@ -1,0 +1,30 @@
+name: Publicar pacote de pre-lancamento
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Obter fontes da revisao
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validar hashes, gerar ZIP e publicar pre-lancamento
+        run: python3 release/package_release.py --publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}

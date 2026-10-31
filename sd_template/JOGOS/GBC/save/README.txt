@@ -1,0 +1,1 @@
+Arquivos persistentes do GBC-S3. Save states GNUBoy usam envelope versionado com CRC32 e slots .ss0-.ss3, .ss9 (auto-save), backups .bak e temporários .tmp. RTC usa .rtc; SRAM de cartucho .sav permanece desabilitada por padrão até validação física SD + BLE. Esta pasta é isolada de /JOGOS/GB/save.

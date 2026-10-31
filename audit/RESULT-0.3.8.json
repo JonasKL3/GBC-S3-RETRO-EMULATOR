@@ -1,0 +1,25 @@
+{
+  "project": "GBC",
+  "version": "0.3.8",
+  "build": "PASS",
+  "native_tests": "PASS",
+  "cpu_mhz": 240,
+  "flash_mb": 16,
+  "psram": "OPI",
+  "partition": "Huge APP",
+  "loop_core": 0,
+  "events_core": 1,
+  "program_bytes": 805491,
+  "global_bytes": 100900,
+  "elf_sha256": "c65d8f224c177b58cbc780de43b829cc74fc4fddb9545a7c271b2f502e1779b7",
+  "changed_firmware_files": [
+    "gbc_audio_output.cpp",
+    "gbc_audio_output.h",
+    "GBC_S3.ino",
+    "gbc_video_output.cpp",
+    "gbc_video_output.h"
+  ],
+  "core_and_ble_sources_unchanged": true,
+  "live_perf_strings_absent_from_elf": true,
+  "physical_test": "not performed"
+}

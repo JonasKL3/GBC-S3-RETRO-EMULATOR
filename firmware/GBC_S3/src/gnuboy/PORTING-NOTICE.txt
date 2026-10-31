@@ -1,0 +1,8 @@
+GNUBoy upstream source is preserved separately under third_party/gnuboy/.
+This folder is the compiled, modified ESP32-S3 subset. Local changes include:
+- emu.h / emu.c: frame-stepping API emu_run_frame() for the Arduino loop.
+- lcd.h / lcd.c: externally supplied tile-pattern cache to place the 256 KiB cache in PSRAM, and unsigned RGB packing shifts to avoid signed-overflow UB.
+- loader.h / loader.c: rom_load_simple declaration, checked allocations, PSRAM allocation for ROM/cart RAM, one-shot allocation for seekable ROM files, failure-path cleanup, and explicit rejection of compressed containers in the embedded frontend.
+- defs.h: little-endian detection for ESP32 and host test builds.
+- gnuboy_platform.c / port_memory.h: embedded platform and PSRAM allocation backends.
+Retain GPL notices and provide corresponding source when distributing firmware binaries.
