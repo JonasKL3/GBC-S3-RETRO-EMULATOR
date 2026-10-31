@@ -32,10 +32,12 @@ if '--publish' in sys.argv:
     tag='v'+version
     existing=subprocess.run(['gh','release','view',tag,'--json','tagName'],cwd=root,text=True,capture_output=True)
     if existing.returncode==0:
-        print('Release already exists; left unchanged: '+tag)
+        # Promote the tested version without replacing its existing ZIP or checksum.
+        subprocess.run(['gh','release','edit',tag,'--prerelease=false','--latest','--title',f'{system}-S3 {version} — sem telemetria','--notes-file',str(root/'release/RELEASE_NOTES.md')],cwd=root,check=True)
+        print('Promoted stable release; original assets preserved: '+tag)
     else:
         error=existing.stderr.lower()
         if 'release not found' not in error and '404' not in error:raise SystemExit(existing.stderr)
         sha=os.environ.get('GITHUB_SHA') or subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
-        subprocess.run(['gh','release','create',tag,str(target),str(out/'SHA256SUMS.txt'),'--target',sha,'--title',f'{system}-S3 DEV {version} — sem telemetria','--notes-file',str(root/'release/RELEASE_NOTES.md'),'--prerelease'],cwd=root,check=True)
+        subprocess.run(['gh','release','create',tag,str(target),str(out/'SHA256SUMS.txt'),'--target',sha,'--title',f'{system}-S3 {version} — sem telemetria','--notes-file',str(root/'release/RELEASE_NOTES.md'),'--latest'],cwd=root,check=True)
         print('Published '+tag)

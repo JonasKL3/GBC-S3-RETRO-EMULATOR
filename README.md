@@ -2,7 +2,7 @@
 
 **Emulador offline para ESP32-S3 N16R8 com ILI9341, microSD, gamepad BLE Dabble e áudio I2S MAX98357A.**
 
-> **Pré-lançamento DEV 0.3.8.** Publicação do projeto independente com fontes completos, build Arduino-ESP32 e testes no computador aprovados. A medição contínua de desempenho foi removida a pedido do autor. Não é uma release estável certificada em hardware.
+> **Release estável 0.3.8.** Publicação do projeto independente com fontes completos, build Arduino-ESP32 e testes no computador aprovados. A medição contínua de desempenho foi removida a pedido do autor. Versão testada pelo autor na placa e publicada como release estável após sua confirmação.
 
 ## Recursos
 

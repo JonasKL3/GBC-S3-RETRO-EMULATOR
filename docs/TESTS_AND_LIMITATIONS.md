@@ -25,7 +25,7 @@ No GBC:seis cartuchos sintéticos, mappers/RTC/áudio/estado, equivalência de f
 
 ## Limitações atuais
 
-- Não houve nova gravação ou medição física da versão sem telemetria neste ambiente. Relatos de melhora em versões anteriores não certificam compatibilidade de todas as ROMs.
+- O autor confirmou o teste da versão sem telemetria na placa e sua publicação como release estável. Essa confirmação não representa uma medição numérica de FPS nem garante compatibilidade com todas as ROMs.
 - Há erros intermitentes de armazenamento5/9 nos logs de uso. Build e testes não provam que cartão, conexão e gravação com BLE estejam resolvidos.
 - Autosave periódicoOFF; reativá-lo pode causar pausa síncrona de gravação. Saves manuais continuam dependentes do SD.
 - O barramento40MHz limita imagens completas. 240×216RGB565 exige no mínimo20,736ms só no fio. Velocidade emulada e atualização do LCD são grandezas diferentes.

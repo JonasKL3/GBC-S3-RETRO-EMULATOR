@@ -1,4 +1,4 @@
-name: Publicar pacote de pre-lancamento
+name: Publicar release
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Validar hashes, gerar ZIP e publicar pre-lancamento
+      - name: Validar hashes, gerar ZIP e publicar release
         run: python3 release/package_release.py --publish
         env:
           GH_TOKEN: ${{ github.token }}
